@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Balls — Теннисный клуб</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* --- CSS ПЕРЕМЕННЫЕ И ОБНУЛЕНИЕ --- */
+        :root {
+            --primary-blue: #1e3a8a; /* Глубокий синий */
+            --accent-green: #4ade80; /* Свежий зеленый */
+            --bg-warm: #fdfdfd;      /* Теплый белый */
+            --text-dark: #1f2937;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Плавная прокрутка */
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-warm);
+        }
+
+        /* --- НАВИГАЦИЯ --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-green);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-green);
+        }
+
+        /* --- ГЛАВНЫЙ РАЗДЕЛ (HERO) --- */
+        header {
+            height: 100vh;
+            background: linear-gradient(rgba(30, 58, 138, 0.7), rgba(74, 222, 128, 0.3)), 
+                        url('https://images.unsplash.com/photo-1595435063823-345380590891?auto=format&fit=crop&q=80&w=1920') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 1rem;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            background-color: var(--accent-green);
+            color: var(--primary-blue);
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #38c172;
+        }
+
+        /* --- ОБЩИЕ СТИЛИ СЕКЦИЙ --- */
+        section {
+            padding: 80px 10%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+        }
+
+        /* --- О КОМПАНИИ --- */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            display: block;
+        }
+
+        /* --- УСЛУГИ --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: var(--transition);
+            border-bottom: 5px solid var(--accent-green);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-card i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 1rem;
+        }
+
+        /* --- КОНТАКТЫ --- */
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            background: var(--primary-blue);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+        }
+
+        .contact-info div {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-info i {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none; /* Для простоты примера скроем меню, в идеале добавить "бургер" */
+            }
+
+            header h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Two<span>Balls</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Главная</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#contact">Контакты</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Two Balls — Твой идеальный сет начинается здесь!</h1>
+        <p>Современные корты, профессиональные тренеры и атмосфера, заряженная на победу. Присоединяйтесь к нашему клубу сегодня.</p>
+        <a href="#contact" class="btn">Забронировать корт</a>
+    </header>
+
+    <section id="about">
+        <h2>Наша История</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Клуб «Two Balls» был основан в 2018 году группой энтузиастов, которые хотели превратить теннис из элитарного спорта в доступный стиль жизни для каждого. Мы начинали с двух открытых кортов, а сегодня это современный спортивный комплекс.</p>
+                <br>
+                <p>Наша миссия — развивать теннисную культуру, объединяя профессионалов и любителей всех возрастов в единое сообщество.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?auto=format&fit=crop&q=80&w=600" alt="Теннисный корт">
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background-color: #f0f4f8;">
+        <h2>Наши Услуги</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-users"></i>
+                <h3>Групповые тренировки</h3>
+                <p>Освойте технику в компании единомышленников под руководством мастера спорта.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-user-ninja"></i>
+                <h3>Индивидуальные занятия</h3>
+                <p>Персональный план развития и максимальное внимание к вашим деталям игры.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Аренда кортов</h3>
+                <p>Профессиональное покрытие Hard и отличное освещение для вашей комфортной игры.</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-child"></i>
+                <h3>Детская школа</h3>
+                <p>Воспитываем будущих чемпионов с раннего возраста через игру и дисциплину.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Свяжитесь с нами</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Информация</h3>
+                <br>
+                <div>
+                    <i class="fas fa-clock"></i>
+                    <span>Пн-Вс: 08:00 – 23:00</span>
+                </div>
+                <div>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>ул. Спортивная, 42, Москва</span>
+                </div>
+                <div>
+                    <i class="fas fa-phone"></i>
+                    <span>+7 (999) 000-11-22</span>
+                </div>
+                <div>
+                    <i class="fas fa-envelope"></i>
+                    <span>hello@twoballs.ru</span>
+                </div>
+            </div>
+            <div class="contact-map">
+                <p style="font-style: italic; opacity: 0.8;">Мы ждем вас на кортах! Позвоните нам или напишите, чтобы забронировать время.</p>
+                <div style="margin-top: 20px;">
+                    <a href="mailto:hello@twoballs.ru" class="btn">Написать письмо</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 20px; background: #eee; font-size: 0.9rem;">
+        &copy; 2026 Теннисный клуб «Two Balls». Все права защищены.
+    </footer>
+
+</body>
+</html>
